@@ -1,0 +1,35 @@
+
+
+{% extends "base.html" %}
+{%block style%}
+	.card{
+		margin-top : 1%;
+		padding : 20px;
+	}
+{%endblock%}
+{%block content%}
+	<div class="container fluid justify-content-center align-items-center">
+		<div class="row justify-content-center align-items-center">
+		<div class="card align-items-center">
+			<h3>The reported admin is {{reportedadmin}}</h3>
+	<h4>Issues reported against this user are</h4>
+	<ul>
+		{%for reason in reasons%}
+			<li>{{reason}}</li>
+		{%endfor%}
+	</ul>
+	{%if report.comment%}
+	<h4>Additional comments:</h4>
+	<p>{{report.comment}}</p>
+	{%else%}
+	<h5>The admin has not included any additional comments</h5>
+	{%endif%}
+	<a id='allbuttons' class="btn btn-light btn-sm" href = "{%url 'users:profile' reportedadmin%}">See admin details</a>
+	<a id='allbuttons' class="btn btn-light btn-sm" href="{%url 'admins:banadmin' admins%}">Remove as admin</a>
+	<a id='allbuttons' class="btn btn-light btn-sm" href="{%url 'users:banuser' admins%}">Remove as user</a>
+	<a id='allbuttons' class="btn btn-light btn-sm" href="{%url 'admins:removereportadmin' admins%}">Ignore Report</a>	
+		</div>
+		</div>
+	</div> 
+{%endblock%}
+

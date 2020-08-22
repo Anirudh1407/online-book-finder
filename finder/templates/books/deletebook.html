@@ -1,0 +1,21 @@
+{%extends 'base.html'%}
+
+{%block style%}
+	.card{
+		margin-top : 15%;
+		padding : 20px;
+	}
+	.btn{
+		width : 150px;
+	}
+{%endblock%}
+{%block content%}
+	<div class="container fluid justify-content-center align-items-center">
+		<div class="row justify-content-center align-items-center">
+		<div class="card align-items-center">
+			<h3>Thank you for choosing the option : {{option}}</h3><br>
+			<a id='allbuttons' type="button" class="btn btn-light" href="/users/">Go Back</a>
+		</div>
+		</div>
+	</div> 
+{%endblock%}

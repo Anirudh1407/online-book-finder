@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block addbook%}active{% endblock addbook%}
+{% block style%}
+	#heading{
+		text-align : center;
+		justify-content : center;	
+	}
+	.card{
+		padding : 15px;
+	}
+{% endblock style%}
+{% block content %}
+    <div class="container h-100" >
+    	<h1 id="heading">Book Addition Form</h1><hr/>    
+    	<div class="row h-100 justify-content-center align-items-center">
+    		<div class="card">
+                {% load crispy_forms_tags %}
+				
+				{% crispy form %}
+                {% if form.errors %}
+                    <p class=" label label-danger">
+                        Book not added properly. 
+                        Please try again.
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

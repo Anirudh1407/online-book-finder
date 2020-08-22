@@ -1,0 +1,49 @@
+{%extends 'base.html'%}
+
+
+
+{%block style%}
+	.card-body{
+		margin : 10px;
+		padding : 4px;
+		max-width : 350px;
+		word-wrap :normal;
+	}
+	.card{
+		padding:5px;
+		margin-top : 50px;
+		margin-left : 10px;
+		margin-right : 10px;
+		max-width : 400px;
+		word-wrap :normal;
+	}
+
+	p{
+		margin-bottom : 0px;
+	}
+	#addissuebutton{
+		background:url(" ../media/images/woodbackground1.jpg") !important;
+		color:white;	
+	}
+{%endblock%}
+{%block content%}
+	<div class="container  justify-content-center align-items-center">
+		<div class="row justify-content-center align-items-center">
+		<div class="card align-items-center">
+			<h5>Make sure the issue is not already reported</h5>
+	{%if allissues%}
+		{%for eachissue in allissues%}
+			<div class="card mt-1 mb-3" id="card">
+				<div class="card-body">
+					<p>{{eachissue.description}}</p>	
+				</div>
+			</div>
+		{%endfor%}	
+	{%else%}
+	<h5>There are no issues currently for this book</h5>
+	{%endif%}
+	<a id='addissuebutton' class="btn btn-light" href="{%url 'issues:addissue' bookfil%}">Proceed to add issue</a>
+		</div>
+		</div>
+	</div> 
+{%endblock%}

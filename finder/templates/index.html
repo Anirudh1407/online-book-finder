@@ -1,0 +1,40 @@
+{%extends 'base.html'%}
+{% load static %}
+{%block home%}active{%endblock home%}
+{%block style%}
+	.container-fluid{
+		margin-top : 15%;
+	}
+	.blockquote-footer{
+		padding-top : 10px;
+		font-size : 1.5em;
+	}
+	h2{
+		font-size : 3em;
+	}
+	#continue-btn{
+		font-size : 1.2em;
+	}
+	#footertext{
+		color:#A9A9A9;
+	}
+	
+{%endblock style%}
+{%block content%}
+	<div class="index">
+		<blockquote class="blockquote text-center">
+			<h2 class="mb-0">Welcome to Online Book Finder.</h2>
+	  		<footer id="footertext"class="blockquote-footer">A one stop for all your books </footer>
+			<footer id="footertext"class="blockquote-footer">Don't miss your chance to run the website:) </footer>
+		</blockquote>
+		<div class="container">
+			<div class="row">
+				<div class ="col"></div>
+				<div class ="col" id="continue-btn" align="center">
+					<a type="button" class="btn btn-success " id="continue-btn" href="/books">Continue</a>
+				</div>
+				<div class ="col"></div>
+			</div>
+		<div>
+	</div>
+{%endblock%}

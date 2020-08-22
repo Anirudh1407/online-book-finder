@@ -1,0 +1,63 @@
+{%extends 'base.html'%}
+{%block addbook%}active{%endblock%}
+
+
+{%block style%}
+	.card{
+		margin-top : 5%;
+		padding : 10px;
+	}
+	li{
+		list-style-type: none;
+		align-items : left;
+		padding: 2px;	
+	}
+	hr{
+		margin : 1px	
+	}
+	ul{
+		margin-bottom : 0px;
+	}
+	.btn{
+		margin : 5px;
+	}
+	#image{
+		width : 200px;
+		height : 260px;
+	}
+{%endblock%}
+{%block content%}
+	<div class="container fluid justify-content-center align-items-center">
+		<h4 class="text-center">The Book with following details will be verified by an admin</h4><hr/>
+		<div class="row justify-content-center align-items-center">
+		<div class="card align-items-center"id="card-img" >				
+			<img id="image" src="{{ bookimg.image.url }}" alt="Book Image"/>
+		</div>
+		
+		<div class="card align-items-center">
+			
+			<h3 class="text-center ">{{bookfil.name}}</h3><hr/>
+			<ul>
+				<li>Edition: {{bookfil.edition}}</li><hr/>
+				
+				<li>Authors:
+					<ul>
+						{%for eachauthor in authorsfil%}
+							<li>{{eachauthor.author}}</li>
+						{%endfor%}
+					</ul><hr/>
+				</li>
+				<li>Tags:
+					<ul>
+						{%for eachtag in tagsfil%}
+							<li>{{eachtag.tag}}</li>
+						{%endfor%}
+					</ul>
+				</li>
+				<li>Link : <a target="_blank" href="{{bookfil.link}}">click here to veiw book</a>
+			</ul>
+			<a id='allbuttons' type="button" class="btn btn-light" href="/books">Go Back</a> 
+		</div>
+		</div>
+	</div> 
+{%endblock%}

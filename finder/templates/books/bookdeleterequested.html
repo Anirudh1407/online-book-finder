@@ -1,0 +1,63 @@
+{%extends 'base.html'%}
+{%block addbook%}active{%endblock%}
+
+
+{%block style%}
+	.card{
+		margin-top : 5%;
+		padding : 10px;
+	}
+	li{
+		list-style-type: none;
+		align-items : left;
+		padding: 2px;	
+	}
+	hr{
+		margin : 1px	
+	}
+	ul{
+		margin-bottom : 0px;
+	}
+	.btn{
+		margin : 5px;
+	}
+	#image{
+		width : 200px;
+		height : 260px;
+	}
+{%endblock%}
+{%block content%}
+	<h3>A delete request for the following book has been issued</h3>
+	<div class="container-fluid justify-content-center align-items-center">
+		<div class="row justify-content-center ">
+		<div class="card align-items-center mb-3 col-4"id="card-img" >				
+			<img id="image" src="{{ bookimage.image.url }}" alt="Book Image"/>
+		</div>
+		
+		<div class="card mb-3 align-items-left col-4" id="card-details">
+			
+			<h3 class="text-center ">{{bookfil.name}}</h3><hr/>
+			<ul>
+				<li>Edition: {{bookfil.edition}}</li><hr/>
+				
+				<li>Authors:
+					<ul>
+						{%for eachauthor in authorsfil%}
+							<li>{{eachauthor.author}}</li>
+						{%endfor%}
+					</ul><hr/>
+				</li>
+				<li>Tags:
+					<ul>
+						{%for eachtag in tagsfil%}
+							<li>{{eachtag.tag}}</li>
+						{%endfor%}
+					</ul>
+				</li>
+				<li>Link : <a target="_blank" href="{{bookfil.link}}">click here to view book</a>
+			</ul>
+			<a id='allbuttons' type="button" class="btn btn-light" href="/books">Go Back</a> 
+		</div>
+		</div>
+	</div> 
+{%endblock%}

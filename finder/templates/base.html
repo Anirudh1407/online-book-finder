@@ -1,0 +1,91 @@
+{% load static %}
+
+<!DOCTYPE html> 
+<html lang = 'en'>
+<head>
+	<meta charset = "UTF-8">
+	<meta name = "veiwport" content="width=device-width,initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie-edge">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<title>Online Book Finder{%block title%}{%endblock%}</title>
+	<style>
+		{%block style%}{% endblock %}
+		html{
+			top:0;
+			left:0;
+			margin :0;
+			padding :0;			
+		}
+		body{
+			top:0;
+			left:0;
+			margin :0;
+			padding :0;
+			background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(" ../media/images/scrollbackground9.jpg");
+			background-position: center;
+			background-repeat : no-repeat;
+			background-size : cover;
+			background-color : none;
+			background-attachment : fixed;
+			overflow-x: hidden;
+			color : White;	
+		}
+		.inner{
+			background: none;
+			
+		}
+		
+		.card,.card-body{
+			background-color:transparent !important;
+			border-radius : 10px;
+			border-color:white;
+
+
+		}
+		#booknavbar{
+			background-color:transparent !important;
+		}
+		#navitem{
+			color:white;		
+		}
+		#allbuttons{
+			background:url(" ../media/images/woodbackground1.jpg") !important;
+			color:white;
+		}
+	</style>
+</head>
+<body>
+
+	<nav id="booknavbar" class="navbar sticky-top navbar-expand-lg bg-dark navbar-dark ">
+		<a class="navbar-brand" href="/">Online Book Finder</a>
+  		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-	controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    	<span class="navbar-toggler-icon"></span>
+  		</button>
+
+		<div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+			<ul class="navbar-nav ">
+				<li class="nav-item {%block home%}{%endblock%} " ><a id='navitem' class="nav-link" href="/">Home</a></li>
+				{%if user.is_authenticated%}
+				<li class="nav-item {%block profile%}{%endblock%}" ><a id='navitem' class="nav-link" href="/users">Profile</a></li>
+		 		<li class="nav-item {%block addbook%}{%endblock%}" ><a id='navitem' class="nav-link" href="/books/addbook">Add Book</a></li>
+				<li class="nav-item {%block logout%}{%endblock%}" ><a id='navitem' class="nav-link" href="/accounts/logout">Logout</a></li>
+				{%else%}
+				<li class="nav-item {%block login%}{%endblock%}" ><a id='navitem' class="nav-link" href="/accounts/login">Login</a></li>
+				{%endif%}
+			</ul>			
+		</div>
+	</nav>
+	
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col">
+			
+			{%block content%}{%endblock%}
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
+
+

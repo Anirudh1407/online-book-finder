@@ -1,0 +1,74 @@
+{%extends 'base.html'%}
+{% block style %}
+	#search{
+		text-align:center;
+		margin-top: 15px;
+		margin-bottom: 10px;
+	}
+	#image{
+		width : 5em;
+		height : 7.5em;
+	}
+	#card{
+		overflow : hidden;
+		margin : 10px;
+		padding : 5px;
+		padding-bottom:0px;
+		border:none !important;
+
+	}
+	.card-body{
+		background-color:transparent !important;
+		border:none !important;
+	}
+
+	.row{
+		
+	}
+	#detailbutton{
+		bottom:0;
+		
+	}
+	#getdetailsbutton{
+		font-size:0.6em;
+		color:white;
+	}
+{% endblock %}	
+{%block content%}
+<div class="container fluid justify-content-center align-items-center" id="search">
+	<form action="search/" method="GET">
+	{%csrf_token%}
+	{{ form }}
+    <input id='allbuttons' class="btn btn-light" type="submit" value="Search">
+	</form>
+</div>
+	<h3 class="text-center">All books currently</h>
+	<div class="container fluid justify-content-center"> 
+	{%if book_list%}
+	
+	<div class="row justify-content-center ">
+		{%for eachbook,bookimage in book_list%}
+			<div id="card"  class="card mb-4 mt-4 align-items-center col-2 ">
+				<div class="card-body ">
+
+
+					<a id="image" href="{% url 'books:details' eachbook.book %}" ><img id="image" src="{{ bookimage.image.url }}" alt="Book Image"/></a>
+					<hr/>
+					<a id="allbuttons" href="{% url 'books:details' eachbook.book %}" >{{eachbook.name}}</a>
+					<hr/>
+					
+				</div>
+			</div>
+		
+
+		{%endfor%}
+	</div>
+
+	{%else%}
+		<h4>There are no books currently</h4>
+	{%endif%}
+	<div class="pagination">
+
+	
+	</div>
+{%endblock%}

@@ -1,0 +1,57 @@
+
+
+
+{%extends 'base.html'%}
+{%block addbook%}active{%endblock%}
+
+
+{%block style%}
+	.card{
+		margin-top : 5%;
+		padding : 10px;
+	}
+	li{
+		list-style-type: none;
+		align-items : left;
+		padding: 2px;	
+	}
+	hr{
+		margin : 1px	
+	}
+	ul{
+		margin-bottom : 0px;
+	}
+	.btn{
+		margin : 5px;
+	}
+	#image{
+		width : 200px;
+		height : 260px;
+	}
+{%endblock%}
+{%block content%}
+	<div class="container fluid justify-content-center align-items-center">
+		<h4 class="text-center">The Book you are trying to add is already present</h4><hr/>
+		<div class="row justify-content-center align-items-center">
+	
+		<div class="card align-items-center"id="card-img" >				
+			<img id="image" src="{{ bookfil.image.url }}" alt="Book Image"/>
+		</div>
+		<div class="card align-items-center">
+			{%if book_list%}
+					{%for eachbook in book_list%}
+						<div class="card mb-3 mt-3">
+							<div class="card-body">
+								<h4>{{eachbook.name}}</h4>
+								<a href="{% url 'books:details' eachbook.book %}" class="btn btn-dark">Get details</a>
+							</div>
+						</div>
+					{%endfor%}
+				{%else%}
+					<p>There are no users</p>
+				{%endif%}
+				<a id='allbuttons' type="button" class="btn btn-light" href="/books">Go Back</a> 
+		</div>
+		</div>
+	</div> 
+{%endblock%}

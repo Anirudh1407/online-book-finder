@@ -1,0 +1,15 @@
+{%extends 'base.html'%}
+{%block content%}
+<div class="col-4">
+	<div class="text-left"><h2>Profile Update</h2></div>
+	<div class="card mb-6 mr-md-2">
+		<div class="card-body mr-md-2" >
+			<form name="form" action = "{% url 'users:profilechange' %}" method="POST">
+				{% load crispy_forms_tags %}
+										
+				{% crispy form %}
+			</form>
+		</div>
+	</div>
+</div>
+{%endblock%}

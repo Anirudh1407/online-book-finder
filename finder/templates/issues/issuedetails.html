@@ -1,0 +1,19 @@
+
+{% extends "base.html" %}
+{%block style%}
+	.card{
+		margin-top : 15%;
+		padding : 20px;
+	}
+{%endblock%}
+{%block content%}
+	<div class="container fluid justify-content-center align-items-center">
+		<div class="row justify-content-center align-items-center">
+		<div class="card align-items-center">
+			<h3>Issue for the book {{issuebook}}</h3>
+			<h3>Issue added by {{issueadder}}</h3>
+			<p>Description: {{issuedesc}}</p>
+		</div>
+		</div>
+	</div> 
+{%endblock%}

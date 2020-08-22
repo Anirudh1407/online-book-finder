@@ -1,0 +1,201 @@
+{%extends 'base.html'%}
+{%block profile%}active{%endblock%}
+{%block style%}
+	.card{
+		margin : 10px 10px 10px 10px;
+	}
+	#pd{
+		padding : 10px;
+		padding-top : 10px;
+	}
+	.card-body{
+		padding: 4px;
+		
+	}
+	#profileul.list-group-item{
+		color : black;
+		background-color : #A9A9A9;
+		border-radius : 10px;	
+	}
+	.text-li-color{
+		background-color:transparent !important;
+	}
+	#profilebutton{
+		background:url(" ../media/images/woodbackground1.jpg") !important;
+		color:white;
+	}
+	
+	
+{% endblock %}
+{%block content%}
+	<h1 id="pd" class="text-left ml-2 mb-3">Hi, {{profilefil.name}}.</h1>
+	<div class="container-fluid">
+		<div class="row justify-content-start">
+		<div class="col-4">
+			<div class="card  mb-3 " id ="profilediv">
+				<h5 id="pd" class="text-lg-left font-weight-bold font-italic float-right">Personal Details</h5>
+	
+				<ul id='profileul' class="list-group list-group-flush">
+					<li class="list-group-item text-li-color" >Country : {{profilefil.country}}</li>
+					{%if profilefil.gender == "M" %}
+					<li class="list-group-item text-li-color">Gender : Male</li>
+					{%endif%}
+					{%if profilefil.gender == "F"  %}
+					<li class="list-group-item text-li-color">Gender : Female</li>
+					{%endif%}
+					<li class="list-group-item text-li-color">DOB : {{profilefil.dob}}</li>
+					<li class="list-group-item text-li-color">Creation Date :  {{profilefil.creation_date}}</li>	
+				</ul>
+				{%if username == user.get_username%}
+					<a id="profilebutton" class="btn btn-primary btn-light btn" href="/users/profilechange">Edit Profile</a>
+				{%endif%}
+					{% if user.get_username == username or is_req_admin%}
+		{%if banneduser%}
+			<hr/>
+			<h5>You have been banned by an admin once</h5>
+			<h5>You will be banned if you are reported once more</h5>
+			
+
+
+		{%endif%}
+		{%if bannedadmin%}
+			<hr/>
+			<h3>You have been banned as an admin by your creator</h3>
+			<p>You can re-apply in {{lefttimebannedadmin}}</p>
+		{%endif%}
+		{%if rejectedadmin%}
+			<h3>Your request for an admin has been rejected </h3>
+			<p>You can re-apply in {{lefttimerejectedadmin}}</p>
+		{%endif%}
+	{% endif %}
+			</div></div>
+			<div class="col">
+				<div class="container">
+				<h2>User Dashboard</h2><br>
+					<div class="row">
+					{% if user.get_username == username or is_req_admin%}
+						<div class="card mb-7 row-7">
+							<div class="card-body" >
+								<a id="profilebutton" class="btn btn-primary btn-light btn " href="{%url 'users:profileredirect' username 'resolvedissues'%}">Resolved Issues</a>
+
+								
+							</div>
+						</div>	
+						<div class="card mb-7 row-7">
+							<div class="card-body" >
+								<a id="profilebutton" class="btn btn-primary btn-light btn" href="{%url 'users:profileredirect' username 'unresolvedissues'%}">Unresolved Issues</a>
+
+								
+							</div>
+						</div>	
+	
+						<div class="card mb-7 row-7">
+							<div class="card-body" >
+								<a id="profilebutton" class="btn btn-primary btn-light btn" href="{%url 'users:profileredirect' username 'booksadded'%}">Books Added</a>
+
+								
+							</div>
+						</div>
+						<div class="card mb-7 row-7">
+							<div class="card-body" >
+								<a id="profilebutton" class="btn btn-primary btn-light btn" href="{%url 'users:profileredirect' username 'bookspending'%}">Pending Books</a>
+
+								
+							</div>
+						</div>
+						<div class="card mb-7 row-7">
+							<div class="card-body" >
+								<a id="profilebutton" class="btn btn-primary btn-light btn" href="{%url 'users:profileredirect' username 'likedbooks'%}">Favourites</a>
+
+								
+							</div>
+						</div>
+					</div>	
+					
+	{%if is_admin%}
+					<hr/>
+					<h2>Admin Dashboard</h2>
+					<div class="row">
+						<div class="card mb-7 row-7">
+							<div class="card-body" >
+								<a id="profilebutton" class="btn btn-primary btn-light btn" href="{%url 'users:profileredirect' username 'adminrequest'%}">Admin Requests</a>
+
+								
+							</div>
+						</div>
+						<div class="card mb-7 row-7">
+							<div class="card-body" >
+								<a id="profilebutton" class="btn btn-primary btn-light btn" href="{%url 'users:profileredirect' username 'deleterequest'%}">Delete Requests</a>
+
+								
+							</div>
+						</div>	
+						<div class="card mb-7 row-7">
+							<div class="card-body" >
+								<a id="profilebutton" class="btn btn-primary btn-light btn" href="{%url 'users:profileredirect' username 'checkbook'%}">Books to be checked</a>
+
+								
+							</div>
+						</div>	
+						<div class="card mb-7 row-7">
+							<div class="card-body" >
+								<a id="profilebutton" class="btn btn-primary btn-light btn" href="{%url 'users:profileredirect' username 'pendingissues'%}">Pending Issues</a>
+
+								
+							</div>
+						</div>	
+						<div class="card mb-7 row-7">
+							<div class="card-body" >
+								<a id="profilebutton" class="btn btn-primary btn-light btn" href="{%url 'users:profileredirect' username 'reissues'%}">Re-Issues</a>
+
+								
+							</div>
+						</div>
+						<div class="card mb-7 row-7">
+							<div class="card-body" >
+								<a id="profilebutton" class="btn btn-primary btn-light btn" href="{%url 'users:profileredirect' username 'reportedusers'%}">Reported Users</a>
+
+								
+							</div>
+						</div>
+						<div class="card mb-7 row-7">
+							<div class="card-body" >
+								<a id="profilebutton" class="btn btn-primary btn-light btn" href="{%url 'users:profileredirect' username 'adminscreated'%}">Admins created</a>
+
+								
+							</div>
+						</div>
+						<div class="card mb-7 row-7">
+							<div class="card-body" >
+								<a id="profilebutton" class="btn btn-primary btn-light btn" href="{%url 'users:profileredirect' user.get_username 'reportedadmins'%}">Reported Admins</a>
+
+								
+							</div>
+						</div>
+						
+					</div>
+
+	{%endif%}	
+	<hr/>
+	{%if username == user.get_username%}
+	{%if admin_eligibility%}
+	
+	<h5>Congrats, you are now eligible to become an admin due to your support towards the website</h5>
+	<a id="profilebutton" class="btn btn-primary btn-light btn" href="{%url 'admins:adminrequestconfirmed' user.get_username %}">Generate Admin Request</a>
+	<hr/>
+	{%endif%}
+	<a id="profilebutton" class="btn btn-primary btn-light btn" href="{% url 'users:deleteconfirm' user.get_username %}">Delete Account</a><hr/>
+	{%endif%}
+	</div>
+	</div>
+	<br/>
+
+
+	
+	<hr/>
+	{% endif %}
+	
+	
+{%endblock%}
+
+

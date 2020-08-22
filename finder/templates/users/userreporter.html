@@ -1,0 +1,33 @@
+
+{% extends "base.html" %}
+{%block style%}
+	.card{
+		margin-top : 1%;
+		padding : 20px;
+	}
+	ul {
+		list-style: none;
+	}
+{%endblock%}
+{%block content%}
+	
+				<div class="card mb-6 mr-md-2">
+		<div class="card-body mr-md-2" >
+	<form name="form" action = "{% url 'users:reportuser' issueid usertype%}" method="POST">
+			
+			
+			<p>This action will be verified by further admins</p>
+			
+			<p>In the comment section, provide specific details, such as a book that the user added that violated the policies of a website or the issue repeatedly reported by the user etc.<p>
+			<p>This will help the admins further checking the user's actions to easily determine whether the user is to be removed or not</p>
+			<h5>Check atleast one of the boxes to indicate why the user is to be reported</h5>
+			
+			{%csrf_token%}
+			{{report_form.as_table}}
+			<hr/>
+			<input  id='allbuttons' class="btn btn-primary btn-light btn-block " type="submit" value="Report user" />
+		</form>
+		</div>
+	</div>
+
+{%endblock%}

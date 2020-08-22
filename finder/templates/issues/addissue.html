@@ -1,0 +1,41 @@
+{%extends 'base.html'%}
+
+
+{%block style%}
+	.card{
+		margin-top : 50px;
+		padding : 10px;
+	}
+	#id_description{
+		height : 150px;
+		width : 300px;
+		background:url(" ../media/images/woodbackground1.jpg") !important;
+		color:white;
+	}
+	#submit{
+		background:url(" ../media/images/woodbackground1.jpg") !important;
+		color:white;
+	}
+	
+	
+{%endblock%}
+{%block content%}
+	<div class="container  ">
+		<div class="row justify-content-center ">
+		<div class="card ">
+			<form name="form" action = "{% url 'issues:addissue' bookfil%}" method="POST">
+				{%csrf_token%}
+			<label for="id_description">Description:</label>
+			<textarea  name="description" maxlength="200"  required="" id="id_description" >
+				
+		    </textarea>
+	<br/>
+	<div class="mx-auto">
+	<hr/>
+	<input id='submit' class="btn btn-light " type="submit" value="Add issue"/>
+	</div>
+	</form>
+		</div>
+		</div>
+	</div> 
+{%endblock%}

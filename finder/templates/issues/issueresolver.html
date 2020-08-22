@@ -1,0 +1,71 @@
+
+
+{% extends "base.html" %}
+
+{%block style%}
+	.card{
+		margin-top : 2%;
+		padding : 20px;
+		margin-bottom: 5%;
+	}
+	#image{
+		width : 120px;
+		height : 180px;
+	}
+	input{
+	align-content:right;
+	
+	}
+	label{
+		
+		width : 100px;
+		display : inline-block;
+	}
+	
+	.btn{
+		padding : 5px;
+		margin : 4px;
+		display : inline-block;
+		position : relative;
+	}
+	#last{
+		padding-left : 0;
+	
+	}
+{%endblock%}
+{%block content%}
+	<div class="container fluid justify-content-center align-items-center">
+		<div class="row justify-content-center align-items-center">
+		<div class="card align-items-center justify-content-left col-5">
+		<p>Current book image</p>
+		
+		<div class="card align-items-center" id="card-img" >				
+			<img id="image" src="{{ bookimg.image.url }}" alt="Book Image"/>
+		</div>
+		
+		
+		
+<form name="form" action = "{% url 'issues:resolveissue' issue.issue%}" method="POST" enctype="multipart/form-data">
+
+{%csrf_token%}
+{{form.as_p}}
+<input class="btn btn-primary " type="submit" value="Submit form" />
+</form>
+{%if changes%}
+<ul>
+{%for eachchange in changes%}
+<li>{{eachchange}}</li>
+{%endfor%}
+</ul>
+{%endif%}
+<div class="container fliud" id="last">
+<p>Make sure to press submit to make sure that the issue is marked as resolved.</p>
+<a id='allbuttons' class="btn btn-light"  href = "{% url 'users:reportuser' issue.issue 'issuer'%} ">Report issue reporter</a>
+
+</div>
+		</div>
+		</div>
+	</div> 
+{%endblock%}
+
+

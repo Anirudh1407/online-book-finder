@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{%block style%}
+	.card{
+		margin-top : 10%;
+		padding : 20px;
+	}
+	.btn{
+		position : relative;
+	}
+	#last{
+		disply :inline-block;
+	}
+{%endblock%}
+{%block content%}
+	<div class="container fluid justify-content-center align-items-center">
+		<div class="row justify-content-center align-items-center">
+		<div class="card align-items-center">
+			<h3>This report was filed by admin:{{reportingadmin}}</h3>
+	<h3>The reported user is {{reporteduser}}</h3>
+	<h4>Issues reported against this user are</h4>
+	<ul>
+		{%for reason in reasons%}
+			<li>{{reason}}</li>
+		{%endfor%}
+	</ul>
+	{%if report.comment%}
+	<h4>Additional comments:</h4>
+	<p>{{report.comment}}</p>
+	{%else%}
+	<h5>The admin has not included any additional comments</h5>
+	{%endif%}	
+	<h5>Issue regarding book:{{bookname}}</h5>
+	{%if allchanges%}
+		<ul>
+			{%for change in allchanges%}
+			<li>{{change}}</li>
+			{%endfor%}
+		</ul>	
+
+	{%endif%}
+	<class div="container fluid" id="last">
+	<a id='allbuttons' class="btn btn-light " href = "{%url 'users:profile' reporteduser%}">See user details</a>
+	<a id='allbuttons' class="btn btn-light " href = "{%url 'users:banuser' reporteduser reportingadmin 'userreport'%}">Ban user</a>
+	<a id='allbuttons' class="btn btn-light " href="{%url 'users:removereport' reporteduser reportingadmin%}">Ignore report</a></div>
+		</div>
+		</div>
+	</div> 
+{%endblock%}

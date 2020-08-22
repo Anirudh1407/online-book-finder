@@ -1,0 +1,25 @@
+{%extends 'base.html'%}
+{%block style%}
+	.card{
+		margin-top : 15%;
+		padding : 20px;
+	}
+{%endblock%}
+{%block content%}
+	<div class="container fluid justify-content-center align-items-center">
+		<div class="row justify-content-center align-items-center">
+		<div class="card align-items-center">
+			<h1 class="text-center mb-3">Hi {{user.get_username}}</h1>
+			<p>Here are the rules you need to know before becoming an admin.<p>
+			<ul>
+			<li>You will now have the power to verify books before they are added</li>
+			<li>You will have the power to resolve issues related to books</li>
+			<li>You can verify other users' admin requests</li>
+			<li>You can report users or admins for violating the rules of the website</li>
+			</ul>
+			<a id='allbuttons' class="btn btn-light" href="{% url 'users:adminrequestconfirmed' user.get_username %}">Make Admin Request</a>
+		</div>
+		</div>
+	</div> 
+{%endblock%}
+

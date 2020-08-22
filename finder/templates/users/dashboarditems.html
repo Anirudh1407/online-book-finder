@@ -1,0 +1,253 @@
+
+{%extends 'base.html'%}
+{% load static %}
+{%block style%}
+	#card-out{
+		width=50%;
+	}
+	#detailsbutton{
+		background:url(" ../media/images/woodbackground1.jpg") !important;
+		color:white;	
+	}
+	
+	
+
+{% endblock %}
+
+{%block content%}
+<div class="col-6 justify-content-center">
+	<div class="card mt-3 mb-6 mr-md-2" >
+		<div class="card-body mr-md-2" >
+			{%if empty%}
+		<p>There's nothing here to display!!!</p>
+	{%endif%}
+	{%if issues_asked_resolved_check_pending%}
+	<h3>Issues Reported(Resolved once,yet to be checked)</h3>
+	<ul>
+		{% for issue in issues_asked_resolved_check_pending %}
+			<div class="card mb-3">
+				<div class="card-body">
+					<p class="lead">{{issue.description}}</p>
+					<a id='allbuttons' class="btn btn-light btn-sm" href="{%url 'issues:issuedetails' issue.issue%}" >See issue details</a>
+					<a id='allbuttons' class="btn btn-light btn-sm" href="{%url 'issues:issueresolved' issue.issue%}" >Issue resolved</a>
+					<a id='allbuttons' class="btn btn-light btn-sm" href="{%url 'issues:issuenotresolved' issue.issue%}" >Issue not resolved</a>
+				</div>
+			</div>
+		{% endfor %}
+	</ul>
+	{% endif %}
+	{%if issues_asked_resolved_first%}
+	<h3>Issues Reported(Resolved and checked)</h3>
+	<ul>
+		{% for issue in issues_asked_resolved_first %}
+			<div class="card mb-3">
+				<div class="card-body">
+					<p class="lead">{{issue.description}}</p>
+					<a id='allbuttons' class="btn btn-light btn-sm" href="{%url 'issues:issuedetails' issue.issue%}" >See issue details</a>
+					
+				</div>
+			</div>
+		{% endfor %}
+	</ul>
+	{% endif %}
+	{%if issues_asked_resolved_second%}
+	<h3>Issues Reported(Resolved twice)</h3>
+	<ul>
+		{% for issue in issues_asked_resolved_second %}
+			<div class="card mb-3">
+				<div class="card-body">
+					<p class="lead">{{issue.description}}</p>
+					<a id='allbuttons' class="btn btn-light btn-sm" href="{%url 'issues:issuedetails' issue.issue%}" >See issue details</a>
+				</div>
+			</div>
+		{% endfor %}
+	</ul>
+	{% endif %}
+	
+	{%if issues_asked_unresolved_first_ask%}
+	<h3>Issues Reported once(Unresolved)</h3>
+	<ul>
+		{% for issue in issues_asked_unresolved_first_ask %}
+			<div class="card mb-3">
+				<div class="card-body">
+					<p class="lead">{{issue.description}}</p>
+					<a id='allbuttons' class="btn btn-light btn-sm" href="{%url 'issues:issuedetails' issue.issue%}" >See issue details</a>
+				</div>
+			</div>
+		{% endfor %}
+	</ul>
+	{% endif %}
+	{%if issues_asked_unresolved_second_ask%}
+	<h3>Issues Reported twice(Unresolved)</h3>
+	<ul>
+		{% for issue in issues_asked_unresolved_second_ask %}
+			<div class="card mb-3">
+				<div class="card-body">
+					<p class="lead">{{issue.description}}</p>
+					<a id='allbuttons' class="btn btn-light btn-sm" href="{%url 'issues:issuedetails' issue.issue%}" >See issue details</a>
+				</div>
+			</div>
+		{% endfor %}
+	</ul>
+	{% endif %}
+	{%if booksfil%}
+	<h3>Books Added</h3>
+	<ul>
+		{% for eachbook in booksfil %}
+			<div class="card mb-3">
+				<div class="card-body">
+				
+					<a id='allbuttons' class="btn btn-primary btn-light btn" href="{%url 'books:details' eachbook.book %}">{{eachbook.name}}</a></li>
+					
+				</div>
+			</div>
+
+		{% endfor %}
+	</ul>
+	{%endif%}
+	{%if bookspending%}
+		{% for eachbook in bookspending %}
+			<div class="card mb-3">
+				<div class="card-body">
+				
+					<a id='allbuttons' class="btn btn-primary btn-light btn" id='detailsbutton' href="{%url 'books:details' eachbook.book %}">{{eachbook.name}}</a>
+			<p>Status:{{eachbook.status}}<p>
+					
+				</div>
+			</div>
+			
+			<hr/>
+		{% endfor %}
+	{%endif%}
+	{%if likedbooks%}
+		{%for book in likedbooks%}
+			<div class="card mb-3">
+				<div class="card-body">
+				
+					<a id='allbuttons' class="btn btn-primary btn-light btn" id='detailsbutton' href="{%url 'books:details' book.book.book %}">{{book.book.name}}</a>
+			<a id='allbuttons' class="btn btn-dark btn-sm" href="{% url 'books:removeliked' book.book.book%}">Remove from liked books</a>
+					
+				</div>
+			</div>
+			
+		{%endfor%}
+	{%endif%}
+	{% if is_admin %}
+	{% if issues_pending %}
+	<h3>Issues pending as Admin</h3>
+		{% for adminissue in issues_pending %}
+			<div class="card mb-3">
+				<div class="card-body">
+					<p class="lead">{{adminissue.description}}</p>
+					<a id='allbuttons' class="btn btn-light btn-sm" href="{% url 'issues:resolveissue' adminissue.issue%}">Resolve</a>	
+					<a id='allbuttons' class="btn btn-light btn-sm" href="{%url 'issues:issuedetails' adminissue.issue%}" >See issue details</a>
+				</div>
+			</div>
+		{% endfor %}
+	{% endif %}
+	{%if checkbooklist%}
+		<h3>Books pending for verification as Admin</h3>
+		{% for book in checkbooklist %}
+			<div class="card mb-3">
+				<div class="card-body">
+					<li><a href="{%url 'books:details' book.book %}">{{book.name}}</a></li>
+					<a id='allbuttons' class="btn btn-light btn-sm" href="{%url 'books:checkbook' book.book 'Accepted'%}">Accept</a>	
+					<a id='allbuttons' class="btn btn-light btn-sm" href="{%url 'books:checkbook' book.book 'Rejected'%}" >Reject</a>
+					<a id='allbuttons' class="btn btn-light btn-sm" type="submit" href = "{% url 'users:reportuser' book.book 'adder'%}">Report book  adder</a>
+				</div>
+			</div>
+		{% endfor %}
+	{%endif%}
+	{% if deletereq_pending %}
+	<h3>Delete requests pending</h3>
+		{% for eachdelreq in deletereq_pending %}
+			<div class="card mb-3">
+				<div class="card-body">
+					<p class="lead">Bookid:{{eachdelreq.book.name}}</p>
+					<p class="lead">RequestedBy:{{eachdelreq.user.username}}</p>
+					<a id='allbuttons' class="btn btn-light btn-sm" href="{% url 'books:details' eachdelreq.book_id %}"%}">Details</a>
+					<a id='allbuttons' class="btn btn-light btn-sm" href="{% url 'admins:deletebook' eachdelreq.id 'delete'%}"%}">Delete Book</a>	
+					<a id='allbuttons' class="btn btn-light btn-sm" href="{% url 'admins:deletebook' eachdelreq.id 'cancel'%}"%}">Cancel</a>	
+					<a id='allbuttons' class="btn btn-light btn-sm" type="submit" href = "{% url 'users:reportuser' eachdelreq.id 'deleter'%}">Report delete  reporter</a>
+				</div>
+			</div>
+		{% endfor %}
+	{% endif %}
+	{% if reporteduserdetails %}
+	<h3>Reported Users pending as Admin</h3>
+	<h5>Click on a username to see the issue reported against the user</h5>
+		{% for report in reporteduserdetails %}
+			<div class="card mb-3">
+				<div class="card-body">
+					
+					<a id='allbuttons' class="btn btn-light btn-block" href="{%url 'users:checkuser' report.0 report.1 %}" %}">{{report.0}}</a>	
+				</div>
+			</div>
+		{% endfor %}
+	{% endif %}
+	{% if createdadminissues %}
+	<h3>Issues pending as Admin Creator</h3>
+		{% for createdadminissue in createdadminissues %}
+			<div class="card mb-3">
+				<div class="card-body">
+					<p class="lead">{{createdadminissue.description}}</p>
+					<a id='allbuttons' class="btn btn-light btn-sm" href="{% url 'issues:resolveissue' createdadminissue.issue%}"%}">Resolve</a>
+					<a id='allbuttons' class="btn btn-light btn-sm" href="{%url 'issues:issuedetails' createdadminissue.issue%}" >See issue details</a>	
+				</div>
+			</div>
+		{% endfor %}
+	{% endif %}
+	{% if adminsavbforreporting %}
+	<h3>Click on an admin's name to report</h3>
+		{% for admin,login in adminsavbforreporting %}
+			<div class="card mb-3">
+				<div class="card-body">
+					<a id='allbuttons' class="btn btn-light btn-block" href="{%url 'admins:reportadmin' admin%}">{{admin}}</a>	
+					<a id='allbuttons' class="btn btn-light btn-block" href="{%url 'users:profile' admin%}">View Profile</a>
+					<h5>Last login date:{{login}}<h5>
+				</div>
+			</div>
+		{% endfor %}
+	{% endif %}
+
+	{% if reportedadmins %}
+	<h3>Click on an admin to see details and validate the reporting</h3>
+		{% for admin in reportedadmins %}
+			<div class="card mb-3">
+				<div class="card-body">
+					<p class="lead"></p>
+					<a id='allbuttons' class="btn btn-light btn-block" href="{%url 'admins:checkadmin' user.get_username admin%}">{{admin}}</a>
+				</div>
+			</div>
+		{% endfor %}
+	{% endif %}
+
+	{%if adminreqfil%}
+		<h3>Pending Requests</h3>
+		{%for adrequest in adminreqfil%}	
+			<div class="card mb-3">
+				<div class="card-body">
+					<p class="lead">{{adrequest}}</p>
+				<a class="btn btn-light btn-sm" href="{%url 'users:profile'  adrequest%}">Get details</a>	
+				<a class="btn btn-light btn-sm" href="{%url 'admins:makeadmin' adrequest%}">Make Admin</a>
+				<a class="btn btn-light btn-sm" href="{%url 'admins:rejectadmin' adrequest%}">Reject</a>
+				</div>
+			</div>
+		{%endfor%}
+	
+	{%endif%}
+	{%endif%}
+	
+	
+
+		</div>
+	</div>
+</div>
+{%endblock%}
+
+
+
+
+
+
+

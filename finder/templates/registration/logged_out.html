@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{%block style%}
+	.card{
+		margin-top : 15%;
+		padding : 20px;
+	}
+	body{
+		background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(" ../../media/images/background.jpg") !important;
+		background-position: center !important;
+		background-repeat : no-repeat !important;
+		background-size : cover !important; 
+		background-color : none !important;
+		background-attachment : fixed !important;
+		overflow-x: hidden !important;
+		color : White !important;
+	}
+{%endblock%}
+{%block content%}
+	<div class="container fluid justify-content-center align-items-center">
+		<div class="row justify-content-center align-items-center">
+		<div class="card align-items-center">
+			<h2>Logged out!</h2>  
+  			<a type="button" class="btn btn-success " href="{% url 'login'%}">Click here to login again.</a>
+		</div>
+		</div>
+	</div> 
+{%endblock%}
+
+
